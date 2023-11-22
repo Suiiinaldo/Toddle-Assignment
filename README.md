@@ -20,6 +20,10 @@ Lets take a look inside the `src` folder
 
 ### Setup the Project
  - Download this template from github and open it in your favourite text editor.
+ - Go inside the folder path and execute the following command:
+    ```
+        npm install
+    ```
  - In the root directory create a `.env` file and add the following env variable
     ```
         PORT = <port number of your choice>
@@ -28,6 +32,11 @@ Lets take a look inside the `src` folder
     ```
         PORT = 3000
     ```
+ - Go inside  the `src` folder and execute the following command:
+    ```
+        npx sequelize init
+    ```
+ - By executing the following command you will get the migrations and seeders folder along with a config.json file inside the config folder.
  - Inside the `src/config.json` folder create a file named `config.json` and write the following code:
     ```
         {
@@ -57,3 +66,7 @@ Lets take a look inside the `src` folder
     ```
  - If you are setting up your development environment, then write the usename of your db, password of your db and in dialect mention whatever db you are using for ex: mysql, sqlite, mariadb, etc.
  - If you are setting up your test or prod environment, make sure you also replace the hosted db url.
+ - To run the server execute the following command :
+    ```
+        npm run dev
+    ```
