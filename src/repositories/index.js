@@ -1,1 +1,4 @@
-module.exports = {};
+module.exports = {
+    UserRepository: require("./user-repository"),
+    
+};
