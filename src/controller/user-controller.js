@@ -20,6 +20,34 @@ async function signup(req,res){
             name : req.body.name,
         });
         SuccessResponse.data = user;
+        SuccessResponse.message = "User Created Successfully";
+        return res
+                .status(StatusCodes.CREATED)
+                .json(SuccessResponse);   
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCodes)
+                .json(ErrorResponse);
+    }
+}
+
+
+/*
+ * POST : /signin 
+ * req-body : { email/username : mg@gm.com/ABCD,
+ *              password : *******,
+ *            }
+ */
+async function signin(req,res){
+    console.log("Inside Controller");
+    try {
+        const user = await UserService.signin({
+            email : req.body.email,
+            password : req.body.password,
+        });
+        SuccessResponse.data = user;
+        SuccessResponse.message = "User Signed In Successfully";
         return res
                 .status(StatusCodes.CREATED)
                 .json(SuccessResponse);   
@@ -34,5 +62,5 @@ async function signup(req,res){
 
 module.exports = {
     signup,
-    
+    signin
 }
