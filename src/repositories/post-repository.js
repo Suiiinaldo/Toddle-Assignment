@@ -1,5 +1,5 @@
 const CrudRepository = require("./crud-repository");
-const { Post, User, Like } = require("../models");
+const { Post, User, Like, Comment } = require("../models");
 const { Sequelize } = require("sequelize");
 
 
@@ -20,6 +20,11 @@ class PostRepository extends CrudRepository {
                         model: Like,
                         required: true,
                         attributes: ["id","userId"],
+                    },
+                    {
+                        model: Comment,
+                        required: true,
+                        attributes: ["id","userId","content"],
                     }
                 ]
             });

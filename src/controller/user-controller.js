@@ -40,7 +40,6 @@ async function signup(req,res){
  *            }
  */
 async function signin(req,res){
-    console.log("Inside Controller");
     try {
         const user = await UserService.signin({
             email : req.body.email,
