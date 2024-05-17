@@ -1,5 +1,5 @@
 const CrudRepository = require("./crud-repository");
-const { Post, User } = require("../models");
+const { Post, User, Like } = require("../models");
 const { Sequelize } = require("sequelize");
 
 
@@ -15,9 +15,11 @@ class PostRepository extends CrudRepository {
                         model: User,
                         required : true,
                         attributes: ["id","name","email","username"],
-                        on : {
-                            col1: Sequelize.where(Sequelize.col("Post.userId"), "=", Sequelize.col("User.id")),
-                        },
+                    },
+                    {
+                        model: Like,
+                        required: true,
+                        attributes: ["id","userId"],
                     }
                 ]
             });

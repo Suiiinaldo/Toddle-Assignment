@@ -22,6 +22,7 @@ async function createPost(req,res){
             payload.userId = userId;
             const response = await PostService.createPost(payload);
             SuccessResponse.data = response;
+            SuccessResponse.message = "Post created successfully";
             return res
                     .status(StatusCodes.CREATED)
                     .json(SuccessResponse);
@@ -39,6 +40,7 @@ async function getPosts(req,res){
     try {
         const response = await PostService.getPosts();
         SuccessResponse.data = response;
+        SuccessResponse.message = "Posts fetched successfully";
         return res
                 .status(StatusCodes.OK)
                 .json(SuccessResponse);
@@ -55,6 +57,7 @@ async function getPost(req,res){
     try {
         const response = await PostService.getPost(req.params.id);
         SuccessResponse.data = response;
+        SuccessResponse.message = "Post fetched successfully";
         return res
                 .status(StatusCodes.OK)
                 .json(SuccessResponse);
@@ -71,6 +74,7 @@ async function deletePost(req,res){
     try {
         const response = await PostService.deletePost(req.params.id);
         SuccessResponse.data = response;
+        SuccessResponse.message = "Post deleted successfully";
         return res
                 .status(StatusCodes.OK)
                 .json(SuccessResponse);
