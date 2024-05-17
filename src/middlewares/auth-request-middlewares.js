@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const { ErrorResponse } = require("../utils/common");
 const AppError = require("../utils/errors/app-error");
+const { UserService } = require("../services");
 
 function validateAuthRequestSignIn(req,res,next){
     if(!req.body.email){
@@ -57,8 +58,25 @@ function validateAuthRequestSignUp(req,res,next){
     next();
 }
 
+async function checkAuth(req,res,next){
+    try {
+        const response = await UserService.isAuthenticated(req.headers[`x-access-token`]);
+        if(response){
+            req.body.userId = response; //setting the user id in the req object
+            next();
+        }
+    } catch (error) {
+        ErrorResponse.error = error;
+        ErrorResponse.message = "Something went wrong while authenticating";
+        return res
+                .status(error.statusCodes)
+                .json(ErrorResponse);
+    }
+}
+
 
 module.exports = {
     validateAuthRequestSignUp,
-    validateAuthRequestSignIn
+    validateAuthRequestSignIn,
+    checkAuth,
 };
