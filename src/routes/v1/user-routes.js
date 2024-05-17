@@ -14,5 +14,12 @@ router.post("/signin",
             AuthRequestMiddlewares.validateAuthRequestSignIn,
             UserController.signin);
 
+router.get("/",
+            AuthRequestMiddlewares.checkAuth,
+            UserController.getAll);
+
+router.get("/profile",
+            AuthRequestMiddlewares.checkAuth,
+            UserController.getProfile);
 
 module.exports = router;

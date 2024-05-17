@@ -66,10 +66,35 @@ async function isAuthenticated(token){
     }
 }
 
+async function getAllUser(){
+    try {
+        console.log("In service");
+        const users = await userRepository.getAllUser();
+
+        return users;
+    } catch (error) {
+        throw new AppError("Cannot get all users", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+ 
+}
+
+async function getProfile(userId){
+    try {
+        const users = await userRepository.getProfile(userId);
+        return users;
+    } catch (error) {
+        throw new AppError("Cannot get all users", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+ 
+}
+
 
 module.exports = {
     createUser,
     signin,
     isAuthenticated,
+    getAllUser,
+    getProfile,
+
 
 };

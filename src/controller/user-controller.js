@@ -58,8 +58,46 @@ async function signin(req,res){
     }
 }
 
+async function getAll(req,res){
+    try {
+
+        const users = await UserService.getAllUser();
+        SuccessResponse.data = users;
+        SuccessResponse.message = "Fetched all Users";
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);   
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCodes)
+                .json(ErrorResponse);
+    }
+
+}
+
+async function getProfile(req,res){
+    try {
+
+        const users = await UserService.getProfile(req.body.userId);
+        SuccessResponse.data = users;
+        SuccessResponse.message = "Fetched your profile";
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);   
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCodes)
+                .json(ErrorResponse);
+    }
+
+}
+
 
 module.exports = {
     signup,
-    signin
+    signin,
+    getAll,
+    getProfile,
 }
