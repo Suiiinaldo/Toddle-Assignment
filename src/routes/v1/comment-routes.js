@@ -3,11 +3,12 @@ const express = require("express");
 const router = express.Router();
 
 const { CommentController } = require("../../controller");
-const { AuthRequestMiddlewares } = require("../../middlewares");
+const { AuthRequestMiddlewares, CommentMiddlewares } = require("../../middlewares");
 
 
 router.post("/",
             AuthRequestMiddlewares.checkAuth,
+            CommentMiddlewares.validateCommentable,
             CommentController.createComment);
 
 router.get("/",

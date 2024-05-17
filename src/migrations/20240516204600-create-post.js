@@ -23,6 +23,10 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
+      commentable:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

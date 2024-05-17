@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    commentable: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
   }, {
     sequelize,
     modelName: 'Post',
