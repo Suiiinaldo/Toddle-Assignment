@@ -37,19 +37,35 @@ class UserRepository extends CrudRepository {
                 include:[
                     {
                         model: Post,
-                        required: true,
+                        // required: true,
                         attributes: ["id","content","image"],
                     },
                     {
                         model: Like,
-                        required: true,
+                        // required: true,
                         attributes: ["id","postId"],
                     },
                     {
                         model: Comment,
                         // required: true,
                         attributes: ["id","postId","content"],
-                    }
+                    },
+                    {
+                        model: User,
+                        as: 'Followers',
+                        attributes: ["id","name","username","email"],
+                        through: {
+                          attributes: [] // Exclude the junction table attributes
+                        }
+                      },
+                      {
+                        model: User,
+                        as: 'Followees',
+                        attributes: ["id","name","username","email"],
+                        through: {
+                          attributes: [] // Exclude the junction table attributes
+                        }
+                      }
                     
                 ]
             });
@@ -68,12 +84,12 @@ class UserRepository extends CrudRepository {
                 include:[
                     {
                         model: Post,
-                        required: true,
+                        // required: true,
                         attributes: ["id","content","image"],
                     },
                     {
                         model: Like,
-                        required: true,
+                        // required: true,
                         attributes: ["id","postId"],
                     },
                     {

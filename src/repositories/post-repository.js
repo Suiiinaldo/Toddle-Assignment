@@ -13,17 +13,17 @@ class PostRepository extends CrudRepository {
                 include: [
                     {
                         model: User,
-                        required : true,
+                        // required : true,
                         attributes: ["id","name","email","username"],
                     },
                     {
                         model: Like,
-                        required: true,
+                        // required: true,
                         attributes: ["id","userId"],
                     },
                     {
                         model: Comment,
-                        required: true,
+                        // required: true,
                         attributes: ["id","userId","content"],
                     }
                 ]
@@ -49,6 +49,16 @@ class PostRepository extends CrudRepository {
                         on : {
                             col1: Sequelize.where(Sequelize.col("Post.userId"), "=", Sequelize.col("User.id")),
                         },
+                    },
+                    {
+                        model: Like,
+                        // required: true,
+                        attributes: ["id","userId"],
+                    },
+                    {
+                        model: Comment,
+                        // required: true,
+                        attributes: ["id","userId","content"],
                     }
                 ]
             });

@@ -3,4 +3,5 @@ module.exports = {
     PostService: require("./post-service"),
     LikeService: require("./like-service"),
     CommentService: require("./comment-service"),
+    FollowService: require("./follow-service"),
 };
