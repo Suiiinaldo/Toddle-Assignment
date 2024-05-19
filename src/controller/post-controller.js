@@ -87,10 +87,29 @@ async function deletePost(req,res){
     }
 }
 
+async function getFeed(req,res){
+    try {
+        console.log(req.body);
+        const response = await PostService.getFeed(req.body.userId);
+        SuccessResponse.data = response;
+        SuccessResponse.message = "Feed generated successfully";
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        ErrorResponse.message = "Something went wrong while fetching the feed";
+        return res
+            .status(StatusCodes.INTERNAL_SERVER_ERROR)
+            .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     createPost,
     getPosts,
     getPost,
     deletePost,
+    getFeed
     
 };

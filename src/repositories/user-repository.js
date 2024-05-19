@@ -57,15 +57,15 @@ class UserRepository extends CrudRepository {
                         through: {
                           attributes: [] // Exclude the junction table attributes
                         }
-                      },
-                      {
+                    },
+                    {
                         model: User,
                         as: 'Followees',
                         attributes: ["id","name","username","email"],
                         through: {
                           attributes: [] // Exclude the junction table attributes
                         }
-                      }
+                    }
                     
                 ]
             });
@@ -96,6 +96,22 @@ class UserRepository extends CrudRepository {
                         model: Comment,
                         // required: true,
                         attributes: ["id","postId","content"],
+                    },
+                    {
+                        model: User,
+                        as: 'Followers',
+                        attributes: ["id","name","username","email"],
+                        through: {
+                          attributes: [] // Exclude the junction table attributes
+                        }
+                    },
+                    {
+                        model: User,
+                        as: 'Followees',
+                        attributes: ["id","name","username","email"],
+                        through: {
+                          attributes: [] // Exclude the junction table attributes
+                        }
                     }
                     
                 ]

@@ -1,7 +1,8 @@
-const { PostRepository } = require("../repositories");
+const { PostRepository, UserRepository } = require("../repositories");
 const { StatusCodes } = require("http-status-codes");
 const AppError = require("../utils/errors/app-error");
 
+const userRepository = new UserRepository();
 const postRepository = new PostRepository();
 
 
@@ -41,11 +42,28 @@ async function deletePost(id){
     }
 }
 
+async function getFeed(userId){
+    try {
+        console.log("Inside getFeed " + userId);
+        const user = await userRepository.getProfile(userId);
+        const followees = user.dataValues.Followees;
+        // Extract followees' ids
+        const followeeIds = followees.map(followee => followee.dataValues.id);
+        followeeIds.push(userId);
+        const feed = await postRepository.getFeed(followeeIds);
+        console.log(followeeIds);
+        return feed;
+    } catch (error) {
+        console.log(error);
+        throw new AppError("Something went wrong while fetching the feed", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 
 module.exports = {
     createPost,
     getPosts,
     getPost,
     deletePost,
-    
+    getFeed,
 }
